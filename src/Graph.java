@@ -1,11 +1,11 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class Graph {
 
-	public int[][] matrix;
+	private Inwoner[] inwoners;
+	private static int aantal;
 
 	public Graph(String filename) throws IOException {
 		read(filename);
@@ -15,22 +15,31 @@ public class Graph {
 		FileReader reader = new FileReader(filename);
 		BufferedReader br = new BufferedReader(reader);
 
-		int aantal = Integer.parseInt(br.readLine());
-		matrix = new int[aantal][aantal];
-
-		for (int i = 0; i < aantal; i++) {
-			parse(br.readLine(), i);
+		aantal = Integer.parseInt(br.readLine());
+		inwoners = new Inwoner [aantal];
+		for(int i = 0; i < aantal; i++) {
+			inwoners[i] = new Inwoner(i);
 		}
+
+		for (int i = 0; i < aantal; i++)
+			insert(br.readLine(), i);
 	}
 
-	private void parse(String line, int i) {
+	private void insert(String line, int i) {
 		String[] lijst = line.split(" ");
-
-		for (int j = 0; j < lijst.length; j++) {
-			if(lijst[j].equals("0"))
-				matrix[i][Integer.parseInt(lijst[j + 1])] = 1;
-			System.out.println(lijst[j]);
+		Inwoner[] aanpakkers = new Inwoner [Integer.parseInt(lijst[0])];
+		for(int j = 0; j < aanpakkers.length; j ++) {
+			aanpakkers[j] = inwoners[Integer.parseInt(lijst[j+1])];
 		}
+		inwoners[i].setAanpakkers(aanpakkers);
 	}
-
+	
+	public String toString() {
+		String s = "";
+		for (int i=0; i < aantal; i++) {
+			s += inwoners[i] + "\n";
+		}
+		return s;
+	}
+	
 }
