@@ -12,7 +12,6 @@ public class Graph {
 		read(filename);
 		best = null;
 		determinebest();
-	
 	}
 
 	private void read(String filename) throws IOException {
@@ -76,7 +75,7 @@ public class Graph {
 			s += inwoners[i] + "\n";
 		}
 		
-		s += "De beste inwoner is inwoner: " + best.getId();
+		s += "De machtigste inwoner is inwoner: " + best.getId();
 		return s;
 	}
 	

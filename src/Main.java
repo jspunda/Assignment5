@@ -1,6 +1,10 @@
 import java.io.IOException;
 
-
+/**
+ * Main klasse. Maakt een nieuwe graph en bepaalt de machtigste persoon in Picolini.
+ * @author Laurens van den Bercken, s4057384 
+ * @author Jeftha Spunda, s4174615
+ */
 public class Main {
 
 	/**
