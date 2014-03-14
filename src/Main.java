@@ -11,5 +11,4 @@ public class Main {
 		Graph g = new Graph("picolini.txt");
 		System.out.println(g);
 	}
-
 }

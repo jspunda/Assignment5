@@ -6,9 +6,13 @@ public class Graph {
 
 	private Inwoner[] inwoners;
 	private static int aantal;
+	private Inwoner best;
 
 	public Graph(String filename) throws IOException {
 		read(filename);
+		best = null;
+		determinebest();
+	
 	}
 
 	private void read(String filename) throws IOException {
@@ -34,11 +38,45 @@ public class Graph {
 		inwoners[i].setAanpakkers(aanpakkers);
 	}
 	
+	private boolean isPath(int a, int b) {
+		Inwoner[] aantepakken = inwoners[a].getAanpakkers();
+		if (inwoners[a].kanPakken(inwoners[b])) {
+			inwoners[a].increment();
+			inwoners[b].decrement();
+			return true;
+		}
+		
+		for(int i = 0; i < aantepakken.length; i++) {
+			if(!aantepakken[i].gepakt()){
+				aantepakken[i].pak();
+				return isPath(aantepakken[i].getId(),b);
+			}
+		}
+		return false;
+	}
+	
+	private void determinebest() {
+		for (int i = 0; i < aantal ; i++) {
+			for(int j = 0; j < aantal; j++){
+				isPath(inwoners[i].getId(), inwoners[j].getId());
+			}
+		}
+		Inwoner temp = inwoners[0];
+		for(int i = 1; i < aantal; i ++) {
+			if(inwoners[i].getScore() > temp.getScore())
+				temp = inwoners[i];
+		}
+		best = temp;
+			
+	}
+	
 	public String toString() {
 		String s = "";
 		for (int i=0; i < aantal; i++) {
 			s += inwoners[i] + "\n";
 		}
+		
+		s += "De beste inwoner is inwoner: " + best.getId();
 		return s;
 	}
 	
