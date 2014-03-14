@@ -21,7 +21,7 @@ public class Inwoner {
 	}
 	
 	public String toString() {
-		String s = "Ik ben inwoner: " + id + " en ik kan aanpakken: \n";
+		String s = "Ik ben inwoner " + id + " en ik kan aanpakken:\t";
 		for(int i = 0; i < aanpakkers.length; i ++) 
 			if(i == aanpakkers.length - 1)
 				s+= aanpakkers[i].getId() + ".";
@@ -29,7 +29,7 @@ public class Inwoner {
 				s += aanpakkers[i].getId() + ", ";
 		
 		if(aanpakkers.length == 0)
-			s+= "Niemand";
+			s+= "Niemand.";
 		return s;
 	}
 }
